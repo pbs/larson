@@ -7,7 +7,7 @@ setup(
     name="larson",
     version="1.1.1",
     description="Library for managing secrets",
-    url="",
+    url="https://github.com/pbs/larson",
     author="PBS",
     author_email="",
     packages=["larson"],
