@@ -1,6 +1,6 @@
 import json
-import sys
 import os
+import sys
 
 import fire
 
@@ -9,6 +9,18 @@ from . import dict_to_bash, get_parameters, put_parameters
 
 def print_to_stderr(*args, **kwargs):
     print(*args, file=sys.stderr, **kwargs)
+
+
+def validate_parameter_store_path(input):
+    try:
+        assert isinstance(input, str)
+        assert input[0] == "/"
+        assert input[-1] == "/"
+    except AssertionError:
+        print_to_stderr("invalid parameter store path {}".format(input))
+        sys.exit(1)
+
+    return True
 
 
 class LarsonCLI(object):
@@ -32,11 +44,13 @@ class LarsonCLI(object):
             print(line)
 
     def get_parameters(self, parameter_store_path, region="us-east-1"):
+        validate_parameter_store_path(parameter_store_path)
         parameters = get_parameters(parameter_store_path, region)
         formatted = json.dumps(parameters, sort_keys=True, indent=4)
         print(formatted)
 
     def put_parameters(self, parameter_store_path, input_file, region="us-east-1"):
+        validate_parameter_store_path(parameter_store_path)
         with open(input_file) as f:
             parameters = json.load(f)
 

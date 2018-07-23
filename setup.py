@@ -5,7 +5,7 @@ DEV_DEPENDENCIES = ["black", "isort", "twine"]
 
 setup(
     name="larson",
-    version="1.1.1",
+    version="1.2.0",
     description="Library for managing secrets",
     url="https://github.com/pbs/larson",
     author="PBS",
