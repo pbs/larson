@@ -8,6 +8,6 @@ fi
 
 TEMP_FILE="$(mktemp -d)/.tmp.sh"
 
-larson generate_bash $JSON_FILE > $TEMP_FILE
+larson generate-bash $JSON_FILE > $TEMP_FILE
 . $TEMP_FILE
 rm $TEMP_FILE

@@ -1,10 +1,9 @@
+import sys
 from shlex import quote
 
-import boto3
 
-
-def _get_boto_client(region):
-    return boto3.client("ssm", region_name=region)
+def print_to_stderr(*args, **kwargs):
+    print(*args, file=sys.stderr, **kwargs)
 
 
 def dict_to_bash(parameters):
@@ -16,34 +15,13 @@ def dict_to_bash(parameters):
     return lines
 
 
-def get_parameters(parameter_store_path, region="us-east-1"):
-    boto_client = _get_boto_client(region)
-    paginating = True
-    next_token = None
-    results = {}
-    while paginating:
-        kwargs = {"Path": parameter_store_path, "WithDecryption": True}
-        if next_token:
-            kwargs["NextToken"] = next_token
-        response = boto_client.get_parameters_by_path(**kwargs)
-        if response.get("NextToken"):
-            next_token = response["NextToken"]
-        else:
-            paginating = False
-        for param in response["Parameters"]:
-            variable_name = param["Name"].split("/")[-1].strip()
-            variable_value = param["Value"].strip()
-            results[variable_name] = variable_value
-    return results
+def validate_parameter_store_path(input):
+    try:
+        assert isinstance(input, str)
+        assert input[0] == "/"
+        assert input[-1] == "/"
+    except AssertionError:
+        print_to_stderr("invalid parameter store path {}".format(input))
+        sys.exit(1)
 
-
-def put_parameters(parameter_store_path, parameters, region="us-east-1"):
-    boto_client = _get_boto_client(region)
-    for key, value in parameters.items():
-        boto_client.put_parameter(
-            Name="{}{}".format(parameter_store_path, key),
-            Value=value,
-            Type="SecureString",
-            Overwrite=True,
-            KeyId="alias/aws/ssm",
-        )
+    return True

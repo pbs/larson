@@ -43,4 +43,4 @@ $ larson put-parameters /a/parameter/store/path/ --input-file=./new-values.json
 
 # Tests
 
-an excellent idea...
+`pytest`
