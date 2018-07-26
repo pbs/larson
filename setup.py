@@ -1,11 +1,11 @@
 from setuptools import setup
 
-DEPENDENCIES = ["boto3>=1.5.0,<2.0.0", "fire>=0.1.0,<0.2.0"]
-DEV_DEPENDENCIES = ["black", "isort", "twine"]
+DEPENDENCIES = ["boto3>=1.5.0,<2.0.0", "click>=6.0.0,<7.0.0"]
+DEV_DEPENDENCIES = ["black", "isort", "twine", "pytest"]
 
 setup(
     name="larson",
-    version="1.2.0",
+    version="2.0.0",
     description="Library for managing secrets",
     url="https://github.com/pbs/larson",
     author="PBS",
