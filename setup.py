@@ -5,7 +5,7 @@ DEV_DEPENDENCIES = ["black", "isort", "twine", "pytest"]
 
 setup(
     name="larson",
-    version="2.0.0",
+    version="2.0.1",
     description="Library for managing secrets",
     url="https://github.com/pbs/larson",
     author="PBS",
