@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 JSON_FILE=${1:-}
 if [[ -z "$JSON_FILE" ]]; then
