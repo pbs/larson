@@ -1,6 +1,6 @@
 from setuptools import setup
 
-DEPENDENCIES = ["boto3>=1.5.0,<2.0.0", "click>=6.0.0,<7.0.0"]
+DEPENDENCIES = ["boto3>=1.5.0,<2.0.0", "click>=6.0.0"]
 DEV_DEPENDENCIES = ["black", "isort", "twine", "pytest"]
 
 setup(
